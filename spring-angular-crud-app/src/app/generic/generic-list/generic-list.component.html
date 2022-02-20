@@ -1,0 +1,27 @@
+<div class="demo-button-container">
+  <button mat-raised-button (click)="save('1','2')" class="demo-button">
+    Add data
+  </button>
+</div>
+
+<table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+    <th mat-header-cell *matHeaderCellDef>
+      {{column}}
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <code *ngIf="isObject(row[column])">
+        {{row[column]|json}}
+      </code>
+      <code *ngIf="!isObject(row[column])">
+        {{row[column]}}
+      </code>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of entity"></mat-paginator>
+

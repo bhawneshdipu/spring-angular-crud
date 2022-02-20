@@ -1,0 +1,23 @@
+.nav-container {
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.nav-sidenav-content {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.content {
+  min-height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+
+  display: flex;
+  align-items: flex-start;
+
+  color: gray;
+  height: auto;
+}
+.nav-sidenav {
+  padding: 20px;
+}
