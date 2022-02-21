@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {GenericRecord} from "./generic.model";
+import {GenericFormField, GenericRecord} from "./generic.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +25,11 @@ export class GenericService {
   }
 
 
-  save(entity: string,data:Object): Observable<Object> {
+  save(entity: string|null,id:string|null, data:Object): Observable<Object> {
     let params = new HttpParams();
-    let url = `./api/save/${entity}`;
+    let url = `./api/save/${entity}/${id}`;
     const headers = new HttpHeaders().set('content-type', 'application/json');
-    return this.http.post<Object>(this.BASE+url, entity, {headers, params});
+    return this.http.post<Object>(this.BASE+url, data, {headers, params});
   }
 
   delete(entity: string,id:string): Observable<Object> {
@@ -41,5 +41,10 @@ export class GenericService {
     const url =`./api/all`
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<GenericRecord>(this.BASE+url, {headers});
+  }
+  getFormControlByEntity(entity:string|null):Observable<GenericFormField[]>{
+    const url =`./api/form/${entity}`
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+    return this.http.get<GenericFormField[]>(this.BASE+url, {headers});
   }
 }

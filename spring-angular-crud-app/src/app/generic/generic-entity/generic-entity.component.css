@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+  }
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+
+    flex-basis: 300px;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+   .mat-column-name{
+  align-self: stretch;
+  max-width: 200px;
+  text-align: center
+  }
+ .mat-header-cell{
+  align-self: stretch;
+  max-width: 200px;
+  text-align: center;
+  padding: 15px;
+ }
+ .mat-cell{
+  align-self: stretch;
+  max-width: 200px;
+  text-align: center;
+  padding: 15px;
+ }

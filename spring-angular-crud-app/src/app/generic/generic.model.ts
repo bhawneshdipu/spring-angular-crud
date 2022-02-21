@@ -49,3 +49,30 @@ export interface GenericModel{
   propertyMap: Map<string,GenericModelProperty>
 }
 export type GenericRecord = Record<string, GenericModel>;
+
+export interface GenericValidatorModel{
+  name:string
+  message: string
+  validator: string
+}
+export interface FieldModel{
+  validations: GenericValidatorModel[];
+  type:string 
+  value:string
+  name:string
+  cssClass: string
+}
+export class GenericLayoutModel{
+  layoutType: string = ''
+  title: string =  ''
+  fields: FieldModel[] =[]
+  cssClass:string = ''
+}
+
+export class GenericFormField {
+  name: string='';
+  type: string='';
+  value: any=null;
+  required: boolean = false;
+  validator: string='';
+}

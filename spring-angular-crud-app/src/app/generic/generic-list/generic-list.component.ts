@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {GenericService} from "../generic.service";
 import {GenericModel, GenericRecord} from "../generic.model";
-import { MatTableDataSource } from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,12 +16,14 @@ export class GenericListComponent implements OnInit,AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator|undefined;
   @ViewChild(MatSort)
   sort: MatSort = new MatSort;
-  
-  public displayedColumns = ['key', 'name', 'cls','propertyMap'];
+
+  public actionColumns = ['actions'];
+  public displayedColumns:any[] = [];
+  public columns:any[] = []
   public entityMap: GenericRecord | undefined;
   public dataSource: any;
   public entity: any;
-  constructor( 
+  constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private genericService: GenericService) {
@@ -36,8 +38,10 @@ export class GenericListComponent implements OnInit,AfterViewInit {
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
                 if(result.length>0){
-                  this.displayedColumns = Object.getOwnPropertyNames(result[0])
+                  this.columns = Object.getOwnPropertyNames(result[0])
                 }
+                this.displayedColumns = this.columns.slice();
+                this.displayedColumns.push(...this.actionColumns);
                 console.log(this.dataSource.paginator)
                 console.log("data list success for entity",this.entity)
               },
@@ -52,12 +56,17 @@ export class GenericListComponent implements OnInit,AfterViewInit {
                 this.entityMap=result;
                 let arr: any[] = [];
                 let data=this.entityMap;
-                Object.keys(data).map(function(key){  
+                Object.keys(data).map(function(key){
                     arr.push(data[key])
                 });
                 this.dataSource = new MatTableDataSource(arr)
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
+                if(arr.length>0){
+                  this.columns = Object.getOwnPropertyNames(arr[0])
+                }
+                this.displayedColumns = this.columns.slice();
+                this.displayedColumns.push(...this.actionColumns);
                 console.log(this.dataSource.paginator)
                 console.log("data fetch success")
               },
@@ -72,7 +81,7 @@ export class GenericListComponent implements OnInit,AfterViewInit {
     console.log(this.dataSource);
     if(this.dataSource){
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;  
+      this.dataSource.sort = this.sort;
     }
   }
 
@@ -94,19 +103,6 @@ export class GenericListComponent implements OnInit,AfterViewInit {
         }
       }
     );
-
-  }
-  save(entity:string,id:string):void{
-    this.genericService.save(entity,id).subscribe({
-        next: (result)=>{
-          console.log("saved item",result);
-        },
-        error:(err)=>{
-          console.log("Error saving entity with id",entity,id)
-        }
-      }
-    );
-
   }
   isObject(data:any){
     return typeof data === 'object';

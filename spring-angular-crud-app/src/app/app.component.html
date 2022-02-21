@@ -7,9 +7,9 @@
 <mat-drawer-container class="nav-container" autosize>
   <mat-drawer #drawer class="nav-sidenav" mode="side">
     <mat-nav-list>
-      <a mat-list-item [href]="'/'" [routerLink]="'/'"> Home </a>
+      <a mat-list-item [href]="'/'" [routerLink]="'/'"> <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>Home</a>
       <mat-divider></mat-divider>
-      <a mat-list-item [href]="'./list/'+link.name" *ngFor="let link of entityList" [routerLink]="'./list/'+link.name"> {{ link.name }} </a>
+      <a mat-list-item [href]="'./list/'+link.name" *ngFor="let link of entityList" [routerLink]="'./list/'+link.name"> <mat-icon aria-hidden="false" aria-label="Example home icon">dashboard</mat-icon>{{ link.name }} </a>
    </mat-nav-list>
  
   </mat-drawer>

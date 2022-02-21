@@ -1,1 +1,15 @@
-<p>generic-edit works!</p>
+<div class="parent" *ngIf="loadCompleted" >
+  <h2> Edit {{entity}} Data for id:{{id}}</h2>
+  <form  [formGroup]="form" (ngSubmit)="onSubmit()"  >
+    <p *ngFor="let formField of formFields" class="form-group">
+      <mat-form-field>
+        <mat-label>{{formField.name}}</mat-label>
+        <input matInput [formControlName]="formField.name" [id]="formField.name" 
+              placeholder="{{formField.name}}" [type]="formField.type" 
+              value="{{getFormData(formField.name)}}" 
+              [required]="formField.required">
+      </mat-form-field>
+    </p>
+    <button mat-flat-button color="accent" type="submit">Submit</button>
+  </form>
+</div>

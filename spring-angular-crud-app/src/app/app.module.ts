@@ -14,8 +14,11 @@ import {GenericModule} from "./generic/generic.module";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatListModule} from '@angular/material/list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RouterModule, Routes } from '@angular/router';
 import { GENERIC_ROUTES } from './generic/generic.routes';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -28,10 +31,14 @@ import { GENERIC_ROUTES } from './generic/generic.routes';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
+    MatToolbarModule,
     MatIconModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatTreeModule,
     MatListModule,
+    MatSnackBarModule,
     MatDividerModule,
     BrowserAnimationsModule,
     BrowserModule,

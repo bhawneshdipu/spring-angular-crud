@@ -1,5 +1,6 @@
 package com.bhawnesh.angular.crud.controller;
 
+import com.bhawnesh.angular.crud.model.GenericFormModel;
 import com.bhawnesh.angular.crud.model.GenericModel;
 import com.bhawnesh.angular.crud.model.GenericModelProperty;
 import com.bhawnesh.angular.crud.service.GenericRepositoryService;
@@ -17,7 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -37,6 +46,67 @@ public class GenericRestController {
         log.info("{}", genericRepositoryService.getEntityModelMap());
         return ResponseEntity.ok(genericRepositoryService.getEntityModelMap());
     }
+    @GetMapping("/api/form/{entity}")
+    public ResponseEntity<?> getFormFields(@PathVariable("entity") String entity) {
+        GenericModel genericModel =genericRepositoryService.getEntityModelMap().get(entity);
+        if(genericModel!=null){
+            List<GenericFormModel> formModelList=new ArrayList<>();
+            for(GenericModelProperty genericModelProperty:genericModel.getPropertyMap().values()){
+                formModelList.add(
+                  GenericFormModel.builder()
+                          .name(genericModelProperty.getName())
+                          .type(getFormType(genericModelProperty))
+                          .required(true)
+                          .validators(Collections.emptyList())
+                          .build()
+                );
+            }
+            return ResponseEntity.ok(formModelList);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    private String getFormType(GenericModelProperty genericModelProperty) {
+        Class<Object> bindingType = genericModelProperty.getBindingType();
+        if(bindingType.equals(Long.class)){
+            return "integer";
+        }
+        if(bindingType.equals(Integer.class)){
+            return "integer";
+        }
+        if(bindingType.equals(Float.class)){
+            return "integer";
+        }
+        if(bindingType.equals(BigInteger.class)){
+            return "integer";
+        }
+        if(bindingType.equals(BigDecimal.class)){
+            return "integer";
+        }
+        if(bindingType.equals(String.class) && genericModelProperty.getName().contains("password")){
+            return "password";
+        }
+        if(bindingType.equals(String.class)){
+            return "text";
+        }
+        if(bindingType.equals(Enum.class)){
+            return "select";
+        }
+        if(bindingType.equals(Date.class)){
+            return "date";
+        }
+        if(bindingType.equals(LocalDate.class)){
+            return "date";
+        }
+        if(bindingType.equals(ZonedDateTime.class)){
+            return "datetime-local";
+        }
+        if(bindingType.equals(LocalDateTime.class)){
+            return "datetime-local";
+        }
+        return "";
+    }
 
     @GetMapping("/api/list/{entity}")
     public ResponseEntity<?> listByEntity(@PathVariable("entity") String entity) {
@@ -51,8 +121,7 @@ public class GenericRestController {
         Object identifier = JSONUtil.toObject(id, genericModelProperty.getBindingType());
         Object instance = genericRepositoryService.getGenericRepository().findById(entityType, identifier);
         if (instance instanceof Optional && ((Optional) instance).isPresent()) {
-            genericRepositoryService.delete(genericRepositoryService.getEntityTypeMap().get(entity), ((Optional<?>) instance).get());
-            return ResponseEntity.ok(Collections.singletonList(instance));
+            return ResponseEntity.ok(Collections.singletonList(((Optional<?>) instance).get()));
         } else {
             return ResponseEntity.ok(Collections.emptyList());
         }
