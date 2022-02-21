@@ -134,6 +134,22 @@ public class GenericRestController {
         Object obj = JSONUtil.toObject(request, genericModel.getCls());
         return ResponseEntity.ok(genericRepositoryService.save(entityType, obj));
     }
+    @PostMapping("/api/save/{entity}/{id}")
+    public ResponseEntity<?> savByEntity(@RequestBody Object request,
+                                         @PathVariable("entity") String entity,
+                                         @PathVariable("id") String id) {
+
+        EntityType<?> entityType = genericRepositoryService.getEntityTypeMap().get(entity);
+        GenericModel genericModel = genericRepositoryService.getEntityModelMap().get(entity);
+        GenericModelProperty genericModelProperty = genericModel.getPropertyMap().get("id");
+        Object identifier = JSONUtil.toObject(id, genericModelProperty.getBindingType());
+        Object instance = genericRepositoryService.getGenericRepository().findById(entityType, identifier);
+        if (instance instanceof Optional && ((Optional) instance).isPresent()) {
+            return ResponseEntity.ok(genericRepositoryService.save(entityType, JSONUtil.toObject(request,genericModel.getCls())));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @DeleteMapping("/api/delete/{entity}/{id-attribute}/{id}")
     public ResponseEntity<?> listByEntity(@PathVariable("entity") String entityStr, @PathVariable("id-attribute") String idAttribute, @PathVariable("id") String id) {

@@ -1,5 +1,9 @@
 package com.bhawnesh.angular.crud.model;
 
+import com.bhawnesh.angular.crud.util.GenericDateDeserializer;
+import com.bhawnesh.angular.crud.util.GenericZonedDateTimeDeserializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -22,5 +26,6 @@ public class SampleModel {
     String name;
 
     @Column(name = "dob")
+    @JsonDeserialize(using = GenericZonedDateTimeDeserializer.class)
     ZonedDateTime dob;
 }

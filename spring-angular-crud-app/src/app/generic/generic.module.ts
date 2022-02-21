@@ -33,7 +33,7 @@ import { GenericEntityComponent } from './generic-entity/generic-entity.componen
     GenericListComponent
   ],
   imports: [
-    RouterModule.forRoot(GENERIC_ROUTES),
+    RouterModule.forRoot(GENERIC_ROUTES, { enableTracing: true, useHash:true }),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

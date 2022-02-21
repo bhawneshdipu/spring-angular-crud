@@ -26,7 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppComponent,
   ],
   imports: [
-    RouterModule.forRoot(GENERIC_ROUTES),
+    RouterModule.forRoot(GENERIC_ROUTES, { enableTracing: true, useHash:true }),
     GenericModule,
     MatToolbarModule,
     MatSidenavModule,
