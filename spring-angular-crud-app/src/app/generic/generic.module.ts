@@ -21,11 +21,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GenericEntityComponent } from './generic-entity/generic-entity.component';
+import { GenericCreateComponent } from './generic-create/generic-create.component';
 @NgModule({
   declarations: [
     GenericEditComponent,
     GenericListComponent,
     GenericEntityComponent,
+    GenericCreateComponent,
   ],
   providers: [GenericService],
   exports: [

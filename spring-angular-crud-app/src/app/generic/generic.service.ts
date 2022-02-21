@@ -31,6 +31,12 @@ export class GenericService {
     const headers = new HttpHeaders().set('content-type', 'application/json');
     return this.http.post<Object>(this.BASE+url, data, {headers, params});
   }
+  saveWithoutId(entity: string|null, data:Object): Observable<Object> {
+    let params = new HttpParams();
+    let url = `./api/save/${entity}/`;
+    const headers = new HttpHeaders().set('content-type', 'application/json');
+    return this.http.post<Object>(this.BASE+url, data, {headers, params});
+  }
 
   delete(entity: string,id:string): Observable<Object> {
     let url = `./api/delete/${entity}/${id}`;

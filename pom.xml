@@ -16,6 +16,13 @@
     <properties>
         <java.version>11</java.version>
     </properties>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Bhawnesh Dipu</name>
+            <url>https://maven.pkg.github.com/bhawneshdipu/spring-angular-crud</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
