@@ -16,9 +16,9 @@
         <java.version>11</java.version>
     </properties>
     <scm>
-        <connection>scm:git:http://github.com/bhawneshdipu/spring-angular-crud</connection>
-        <developerConnection>scm:git:http://github.com/bhawneshdipu/spring-angular-crud</developerConnection>
-        <url>scm:svn:http://github.com/bhawneshdipu/spring-angular-crud</url>
+        <connection>scm:git:git@github.com:bhawneshdipu/spring-angular-crud.git</connection>
+        <developerConnection>scm:git:git@github.com:bhawneshdipu/spring-angular-crud.git</developerConnection>
+        <url>scm:git:git@github.com:bhawneshdipu/spring-angular-crud.git</url>
       <tag>spring-angular-crud-0.0.1</tag>
   </scm>
     <distributionManagement>
