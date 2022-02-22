@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {GenericFormField, GenericRecord} from "./generic.model";
@@ -7,8 +7,17 @@ import {GenericFormField, GenericRecord} from "./generic.model";
   providedIn: 'root'
 })
 export class GenericService {
-  public BASE ='http://localhost:8080/ui/'
+  public LOCAL_BASE ='http://localhost:8080/ui/'
+  public BASE = this.LOCAL_BASE;
   constructor(private http: HttpClient) {
+    console.log("Init Generic Service");
+    let url =`/ui-config/base-path`
+    this.http.get<string>(url).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.BASE = result;
+      }
+    });
   }
 
   findById(entity:string,id: string): Observable<Object[]> {

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class GenericController {
     @GetMapping("${com.bhawnesh.angular.crud.config.ui.path:/ui}")
     public String index() {
-        return "redirect:/spring-angular-crud-app/index.html";
+        return "redirect:/ui/index.html";
     }
 }

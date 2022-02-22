@@ -11,9 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -61,7 +59,7 @@ public class GenericRepositoryService {
             GenericModel genericModel = new GenericModel();
             genericModel.setName(entityType.getKey());
             genericModel.setCls((Class<Object>) entityType.getValue().getJavaType());
-            Map<String,GenericModelProperty> genericModelPropertyMap = new HashMap<>();
+            Map<String, GenericModelProperty> genericModelPropertyMap = new HashMap<>();
             for (SingularAttribute attribute : attributes) {
                 GenericModelProperty modelProperty = GenericModelProperty.builder()
                         .name(attribute.getName())

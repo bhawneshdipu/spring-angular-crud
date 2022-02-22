@@ -9,10 +9,13 @@
 ```xml
 <dependency>
   <groupId>com.bhawnesh.angular</groupId>
-  <artifactId>spring-angular-curd</artifactId>
+  <artifactId>spring-angular-crud</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
-### 2. start application in 8080 port
+### 2. add Annotation `@EnableGenericCrudUI`
+### 2. start application 
 
-### 3. go to  http://localhost:8080/ui/
+### 3. go to  http://localhost:<port>/ui/
+
+### 4. Configure UI base path with : `com.bhawnesh.angular.crud.config.ui.path=/ui`

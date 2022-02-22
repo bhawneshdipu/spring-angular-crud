@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bhawnesh.angular</groupId>
-    <artifactId>spring-angular-curd</artifactId>
+    <artifactId>spring-angular-crud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Spring Angular Crud App</name>
     <description>Spring Angular Crud App</description>
@@ -176,13 +176,34 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/static/spring-angular-crud-app</outputDirectory>
+                            <outputDirectory>${basedir}/target/classes/static/ui</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/spring-angular-crud-app/dist/spring-angular-crud-app</directory>
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>exec</classifier>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,8 +1,6 @@
 package com.bhawnesh.angular.crud.model;
 
-import com.bhawnesh.angular.crud.util.GenericDateDeserializer;
 import com.bhawnesh.angular.crud.util.GenericZonedDateTimeDeserializer;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
