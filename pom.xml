@@ -9,17 +9,17 @@
     </parent>
     <groupId>com.bhawnesh.angular</groupId>
     <artifactId>spring-angular-crud</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Spring Angular Crud App</name>
     <description>Spring Angular Crud App</description>
     <properties>
         <java.version>11</java.version>
     </properties>
     <scm>
-        <connection>scm:git:git@github.com:bhawneshdipu/spring-angular-crud.git</connection>
-        <developerConnection>scm:git:git@github.com:bhawneshdipu/spring-angular-crud.git</developerConnection>
-        <url>scm:git:git@github.com:bhawneshdipu/spring-angular-crud.git</url>
-      <tag>spring-angular-crud-0.0.1</tag>
+        <connection>scm:git:http://github.com/bhawneshdipu/spring-angular-crud</connection>
+        <developerConnection>scm:git:http://github.com/bhawneshdipu/spring-angular-crud</developerConnection>
+        <url>scm:svn:http://github.com/bhawneshdipu/spring-angular-crud</url>
+      <tag>HEAD</tag>
   </scm>
     <distributionManagement>
         <repository>
