@@ -3,7 +3,17 @@
 
 name: Maven Release Web
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: "Default version to use when preparing a release."
+        required: true
+        default: "X.Y.Z"
+      developmentVersion:
+        description: "Default version to use for new local working copy."
+        required: true
+        default: "X.Y.Z-SNAPSHOT"
 
 jobs:
   build:
@@ -21,11 +31,14 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
+      - name: Configure Git User
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Publish to GitHub Packages Apache Maven
-        run: mvn release:clean release:prepare -s $GITHUB_WORKSPACE/settings.xml
+      - name: Release to GitHub Packages Apache Maven
+        run: mvn release:prepare release:perform -B -s .maven_settings.xml -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          USERNAME: ${{ github.actor }}
+          PASSWORD: ${{ github.token }}
