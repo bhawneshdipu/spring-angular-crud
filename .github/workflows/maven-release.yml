@@ -37,7 +37,7 @@ jobs:
           git config user.name "GitHub Actions"
 
       - name: Release to GitHub Packages Apache Maven
-        run: mvn release:prepare release:perform -B -s .maven_settings.xml -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
+        run: mvn release:prepare release:perform -B -s $GITHUB_WORKSPACE/.github/maven-settings.xml -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
           USERNAME: ${{ github.actor }}
